@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+<!--    use @{''} for defining relative path-->
+    <link rel="stylesheet" th:href="@{'/css/output.css'}" >
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div id="content">
+        <h1>Welcome to home page</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae porro optio iste quisquam a.
+        </p>
+    </div>
+    <script>
+        console.log("Home page");
+    </script>
+</body>

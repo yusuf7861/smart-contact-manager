@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- method to pass id = th:replace="~{base :: parent(~{::#content})}" -->
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+<head>
+    <title>About Page</title>
+</head>
+<body>
+
+    <div class="mt-16" id="content">
+        <h1>Welcome to about page</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae porro optio iste quisquam a.
+        </p>
+    </div>
+    <script>
+        console.log("about page");
+    </script>
+</body>
+</html>

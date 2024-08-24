@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp Page</title>
+</head>
+<body>
+    <div class="pt-20" id="content">
+        <div class="grid-cols-12 flex justify-center  bg-gray-50 dark:bg-gray-900">
+            <div class="col-span-4 md:col-span-2 lg:col-span-3 xl:col-span-4"></div>
+            <div class="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-4 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+
+                <!--  Alert! message included here using thymeleaf fragment -->
+                <div th:replace="~{message :: messagebox}"></div>
+
+                <!-- Card starts here -->
+                <div href="#"
+                    class="block p-6 border-t-8 border-blue-700 rounded-lg shadow hover:dark:bg-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Signup Here</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Start managing your contacts on cloud.....
+                    </p>
+
+                    <!-- form starts here -->
+                    <form th:action="@{'/do-register'}"
+                          method="post"
+                            th:object="${userForm}"
+
+                          class="max-w-sm mx-auto" novalidate>
+                        <!--  Form mein "userForm" object ka data bind kiya ja raha hai -->
+
+                        <!-- Name Field -->
+                        <div class="mb-3">
+                            <label for="name"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <input type="text" id="name"
+                                   th:field="*{name}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Enter your name" required />
+                            <p class="text-red-600 font-thin py-1 font-sans"
+                               th:if="${#fields.hasErrors()}"
+                               th:errors="*{name}"
+                            >
+                                // name is the property name of UserForm
+                            </p>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                            <input type="email"
+                                   id="email"
+                                   th:field="*{email}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Enter your email" required />
+                            <p class="text-red-600 font-thin py-1 font-sans"
+                               th:if="${#fields.hasErrors()}"
+                               th:errors="*{email}"
+                            >
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label for="password"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <input type="password"
+                                   id="password"
+                                   th:field="*{password}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required />
+                            <p class="text-red-600 font-thin py-1 font-sans"
+                               th:if="${#fields.hasErrors()}"
+                               th:errors="*{password}"
+                            >
+                        </div>
+
+                        <!-- PhoneNumber field -->
+                        <div class="mb-3">
+                            <label for="number"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                                Number</label>
+                            <input type="number"
+                                   id="number"
+                                   th:field="*{phoneNumber}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Enter your phone number" required />
+                            <p class="text-red-600 font-thin py-1 font-sans"
+                               th:if="${#fields.hasErrors()}"
+                               th:errors="*{phoneNumber}"
+                            >
+                        </div>
+
+                        <!-- Text-Area Field-->
+
+                        <div class="mb-3">
+                            <label for="about"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Write something
+                                about yourself</label>
+                            <textarea id="about"
+                                      rows="6"
+                                      th:field="*{about}"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Write Here.."></textarea>
+                            <p class="text-red-600 font-thin py-1 font-sans"
+                               th:if="${#fields.hasErrors()}"
+                               th:errors="*{about}"
+                            >
+                        </div>
+
+
+                        <!-- Submit Button -->
+                        <div class="mb-3 flex justify-center">
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Signup</button>
+                        </div>
+
+<!--                        &lt;!&ndash; Reset Button &ndash;&gt;-->
+<!--                        <div class="mb-3 flex justify-center space-x-3">-->
+<!--                            <button type="reset"-->
+<!--                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Reset</button>-->
+<!--                        </div>-->
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        console.log("SignUp page");
+    </script>
+</body>
+
+</html>

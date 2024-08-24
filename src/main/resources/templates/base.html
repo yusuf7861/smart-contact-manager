@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- if you declare fragment in <html then entire page will be included in the page where parent is insert, or replace -->
+<html class="light" lang="en" xmlns:th="http://thymeleaf.org" th:fragment="parent(content, title, script)">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head class="dark">
+    <meta charset="UTF-8">
+    <!-- TailwindCss output css link -->
+    <link rel="stylesheet" th:href="@{'/css/output.css'}">
+
+    
+    <!-- FlowBite CDN here -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- FontAwesome CDN here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Title of the page -->
+    <title data-th-replace="${title}">SCM</title>
+</head>
+<body class="dark:text-white bg-gray-50 dark:bg-gray-900">
+    <div th:replace="~{navbar :: navbar}">
+    </div>
+
+    <!-- this element is coming from parent(content) -->
+    <div>
+        <div data-th-replace="${content}">
+        </div>
+    </div>
+
+    <!-- <footer class="p-5 font-sans">
+        <p>This is a footer</p>
+    </footer> -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script th:src="@{'/js/script.js'}"></script>
+    <th:block data-th-replace="${script}"></th:block>
+</body>
+</html>
