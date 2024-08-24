@@ -1,12 +1,15 @@
 package com.scm.services.impl;
 
+import com.scm.entities.Providers;
 import com.scm.entities.User;
+import com.scm.helpers.AppConstants;
 import com.scm.helpers.ResourceNotFoundException;
 import com.scm.repositories.UserRepo;
 import com.scm.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +24,8 @@ public class UserServiceImp implements UserService {
 
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user) {
@@ -28,9 +33,20 @@ public class UserServiceImp implements UserService {
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
 
-        //TODO: password encode : user.setPassword(userId);
+        // password encode : user.setPassword(userId);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // set the user role
+        user.setRoleList(List.of(AppConstants.USER_ROLE));
+
+        // Check for null providers and set a default value
+        if (user.getProviders() == null) {
+            logger.warn("User provider is null for user: {}", user.getEmail());
+            user.setProviders(Providers.SELF); // Default value
+        }
 
 
+        logger.info(user.getProviders().toString());
         return userRepo.save(user);
     }
 
