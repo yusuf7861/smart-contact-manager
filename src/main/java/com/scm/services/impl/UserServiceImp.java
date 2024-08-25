@@ -38,6 +38,7 @@ public class UserServiceImp implements UserService {
 
         // set the user role
         user.setRoleList(List.of(AppConstants.USER_ROLE));
+        user.setEnabled(true);
 
         // Check for null providers and set a default value
         if (user.getProviders() == null) {

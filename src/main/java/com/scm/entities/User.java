@@ -36,12 +36,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String phoneNumber;
 
+
     private boolean enabled = true;
     private boolean emailVerified = false;
     private boolean phoneVerified = false;
 
 
-//    user can log in using many social accounts
+//    user can log in using many social accountsRF
     @Enumerated(value = EnumType.STRING)
     private Providers providers = Providers.SELF;
     private String providerUserId;
