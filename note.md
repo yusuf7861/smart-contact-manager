@@ -81,11 +81,3 @@ To insert a fragment declared in another file, use the `th:insert` or `th:replac
 - `th:replace` replaces the current tag with the fragment content.
 
 Fragments help in maintaining consistency and DRY (Don't Repeat Yourself) principles in your application.
-
----
-
-This refined README includes:
-
-- **Clearer explanations** of what each step does.
-- **Better structuring** of the content to make it easy to follow.
-- **Additional comments** in code examples for a more beginner-friendly approach.

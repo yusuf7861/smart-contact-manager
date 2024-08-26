@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -40,6 +41,9 @@ public class SecurityConfig {
 
     @Autowired
     private SecurityCustomUserDetailService userDetailService;
+
+    @Autowired
+    private OAuthAuthenticationSuccessHandler handler;
 
 
     // authentication provider
@@ -93,6 +97,23 @@ public class SecurityConfig {
 //                    throw new UnsupportedOperationException("Not supported yet.");
 //                }
 //            });
+        });
+
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        // if you don't want to use csrf token then you can disable it by using the above line
+        // if you want to make it enable then you can remove the above line
+        // and create a logout form and post the request to /logout
+
+//        // configuration for logout
+        httpSecurity.logout(logout ->{
+            logout.logoutUrl("/logout");
+            logout.logoutSuccessUrl("/login?logout=true");
+        });
+
+//        OAuth2 login
+        httpSecurity.oauth2Login(oauth -> {
+                    oauth.loginPage("/login");
+                    oauth.successHandler(handler);
         });
 
         return httpSecurity.build();
