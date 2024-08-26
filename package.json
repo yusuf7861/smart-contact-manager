@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "tailwindcss": "^3.4.10"
-  },
   "dependencies": {
     "scm2.0": "file:"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
   }
 }
